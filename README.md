@@ -1,2 +1,2 @@
-# RMVToolbox
+# RMV
 Regularized Multivariate Volatility Modeling Toolbox
