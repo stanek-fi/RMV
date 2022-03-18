@@ -1,4 +1,4 @@
-function [parameters, ll, Ht, output, VCV, scores] = caw(data,dataAsym,p,o,q,type,startingVals,options,lambdaDiagonal,matricesDiagonal,regularizationDiagonal,lambdaFull,matricesFull,regularizationFull)
+function [parameters, ll, Ht, output, VCV, scores] = bekk(data,dataAsym,p,o,q,type,startingVals,options,lambdaDiagonal,matricesDiagonal,regularizationDiagonal,lambdaFull,matricesFull,regularizationFull)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Input Argument Checking
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,11 +93,11 @@ k2 = k*(k+1)/2;
 if ~isempty(startingVals)
     switch type
         case 1
-            count = p+o+q+1;
+            count = p+o+q;
         case 2
-            count = (p+o+q)*k+1;
+            count = (p+o+q)*k;
         case 3
-            count = (p+o+q)*k*k+1;
+            count = (p+o+q)*k*k;
     end
     count = count + k2;
     if length(startingVals)~=count
@@ -153,7 +153,7 @@ if isempty(startingVals)
         temp = temp * shape;
         sv = [sv;temp(:)]; %#ok<AGROW>
     end
-    startingVals = [C;sv;k+1];
+    startingVals = [C;sv];
 end
 UB = .99998 * ones(size(startingVals));
 UB(1:k2) = inf;
@@ -182,7 +182,7 @@ end
 if type==2
     if isinf(lambdaDiagonal)
         Restricted=eye(k);
-        Restricted=[zeros(((k^2-k)/2+k),1); diag(Restricted); diag(Restricted);0];
+        Restricted=[zeros(((k^2-k)/2+k),1); diag(Restricted); diag(Restricted)];
         indexRestricted=find(Restricted);
         AeqDiagonal=zeros(length(indexRestricted)-2,length(Restricted));
         for b=1:2
@@ -212,7 +212,7 @@ end
 if type==3
     if isinf(lambdaDiagonal)
         Restricted=eye(k);
-        Restricted=[zeros(((k^2-k)/2+k),1); Restricted(:); Restricted(:);0];
+        Restricted=[zeros(((k^2-k)/2+k),1); Restricted(:); Restricted(:)];
         indexRestricted=find(Restricted);
         AeqDiagonal=zeros(length(indexRestricted)-2,length(Restricted));
         for b=1:2
@@ -229,7 +229,7 @@ if type==3
     
     if isinf(lambdaFull)
         Restricted=1-eye(k);
-        Restricted=[zeros(((k^2-k)/2+k),1); Restricted(:); Restricted(:);0];
+        Restricted=[zeros(((k^2-k)/2+k),1); Restricted(:); Restricted(:)];
         indexRestricted=find(Restricted);
         AeqFull=zeros(length(indexRestricted),length(Restricted));
         for r=1:length(indexRestricted)
@@ -247,15 +247,15 @@ end
 
 
 warning('off') %#ok<*WNOFF>
-[parameters,ll,~,output] = fmincon(@caw_likelihood,startingVals,[],[],Aeq,beq,[],[],[],options,data,dataAsym,p,o,q,backCast,backCastAsym,type,lambdaDiagonal,matricesDiagonal,regularizationDiagonal,lambdaFull,matricesFull,regularizationFull);
+[parameters,ll,~,output] = fmincon(@bekk_likelihood,startingVals,[],[],Aeq,beq,[],[],[],options,data,dataAsym,p,o,q,backCast,backCastAsym,type,lambdaDiagonal,matricesDiagonal,regularizationDiagonal,lambdaFull,matricesFull,regularizationFull);
 % [parameters,ll,~,output] = fminunc(@caw_likelihood,startingVals,options,data,dataAsym,p,o,q,backCast,backCastAsym,type,lambdaDiagonal,matricesDiagonal,regularizationDiagonal,lambdaFull,matricesFull,regularizationFull);
 warning('on') %#ok<*WNON>
 
-[ll,~,Ht] = caw_likelihood(parameters,data,dataAsym,p,o,q,backCast,backCastAsym,type,0,[],[],0,[],[]);
+[ll,~,Ht] = bekk_likelihood(parameters,data,dataAsym,p,o,q,backCast,backCastAsym,type,0,[],[],0,[],[]);
 ll = -ll;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Inference
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if nargout>=5
-    [VCV,~,~,scores] = robustvcv(@caw_likelihood,parameters,0,data,dataAsym,p,o,q,backCast,backCastAsym,type,lambdaDiagonal,matricesDiagonal,regularizationDiagonal,lambdaFull,matricesFull,regularizationFull);
+    [VCV,~,~,scores] = robustvcv(@bekk_likelihood,parameters,0,data,dataAsym,p,o,q,backCast,backCastAsym,type,lambdaDiagonal,matricesDiagonal,regularizationDiagonal,lambdaFull,matricesFull,regularizationFull);
 end

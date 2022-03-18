@@ -31,6 +31,16 @@ switch lossFunction
         for t=1:T
             L(t)=0.5*(logLikConst + log(det(Hf(:,:,t))) + sum(diag(Hf(:,:,t)^(-1)*Hr(:,:,t))));
         end
+    case 'minusCAWll'
+        %v=12.1075;
+        v=27.2492;
+        logLikConst=(v*k/2*log(2)+k*(k-1)/4*log(pi));
+        for ik=1:k
+            logLikConst=logLikConst+log(gamma((v+1-ik)/2));
+        end
+        for t=1:T
+            L(t) = logLikConst + 0.5*(v*log(det(Hf(:,:,t)/v)) - (v-k-1)*log(det(Hr(:,:,t))) + sum(diag(v*Hf(:,:,t)^(-1)*Hr(:,:,t))));
+        end
 end
 l=mean(L);
 end

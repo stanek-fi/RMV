@@ -1,52 +1,20 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration file="C:\Data\CERGE-EI\RegularizedMultivariateVolatility\RMVToolbox\ToolboxPackagingConfiguration.prj" location="C:\Data\CERGE-EI\RegularizedMultivariateVolatility\RMVToolbox" name="ToolboxPackagingConfiguration" target="target.toolbox" target-name="Package Toolbox">
-    <param.appname>RMVToolbox</param.appname>
-    <param.authnamewatermark />
-    <param.email />
+  <configuration file="C:\Data\CERGE-EI\RegularizedMultivariateVolatility\RegularizedMultivariateVolatility\RMV\RMV.prj" location="C:\Data\CERGE-EI\RegularizedMultivariateVolatility\RegularizedMultivariateVolatility\RMV" name="RMV" target="target.toolbox" target-name="Package Toolbox">
+    <param.appname>RMV</param.appname>
+    <param.authnamewatermark>Filip Staněk</param.authnamewatermark>
+    <param.email>stanek.fi@gmail.com</param.email>
     <param.company />
-    <param.summary />
-    <param.description />
+    <param.summary>RMV - package for regularized multivariate volatility modeling</param.summary>
+    <param.description>This Malab package builds upon the MFE toolbox (Sheppard, 2013) and provides functions for (feasible) regularized multivariate volatility modeling. It support both CAW (see function caw_regularized()) and BEKK (see function bekk_regularized()) models. Each of these functions find the optimal degree of regularization for both diagonal and off diagonal parameters via a pseudo out-of-sample evaluation and then estimate the optimally regularized model on the whole supplied dataset. As of now, it only supports order p=q=1. For more information, see the accompanying article “Unrestricted, Restricted, and Regularized Models for Forecasting Multivariate Volatility” by Stanislav Anatolyev and Filip Staněk.</param.description>
     <param.screenshot />
-    <param.version>1.0</param.version>
-    <param.output>${PROJECT_ROOT}\RMVToolbox.mltbx</param.output>
+    <param.version>2.0</param.version>
+    <param.output>${PROJECT_ROOT}\RMV.mltbx</param.output>
     <param.products.name />
     <param.products.id />
     <param.products.version />
     <param.platforms />
-    <param.guid>bf4acf8e-6de0-4f13-a23b-a2e8a2574192</param.guid>
-    <param.exclude.filters>% List files contained in your toolbox folder that you would like to exclude
-% from packaging.  Excludes should be listed relative to the toolbox folder.
-% Some examples of how to specify excludes are provided below:
-%
-% A single file in the toolbox folder:
-% .svn
-%
-% A single file in a subfolder of the toolbox folder:
-% example/.svn
-%
-% All files in a subfolder of the toolbox folder:
-% example/*
-%
-% All files of a certain name in all subfolders of the toolbox folder:
-% **/.svn
-%
-% All files matching a pattern in all subfolders of the toolbox folder:
-% **/*.bak
-%
-resources/project/*
-.SimulinkProject/*
-_SimulinkProject/*
-resources/.Project/*
-resources/_Project/*
-**/*.prj
-**/.git
-M/scalar_vt_vech
-M/scalar_vt_vech/scalar_vt_vech.m
-M/scalar_vt_vech/scalar_vt_vech_itransform.m
-M/scalar_vt_vech/scalar_vt_vech_likelihood.m
-M/scalar_vt_vech/scalar_vt_vech_simulate.m
-M/scalar_vt_vech/scalar_vt_vech_starting_values.m
-M/scalar_vt_vech/scalar_vt_vech_transform.m</param.exclude.filters>
+    <param.guid>b5a823fd-224b-459f-a1e7-7555f2129c30</param.guid>
+    <param.exclude.filters />
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
@@ -57,9 +25,13 @@ M/scalar_vt_vech/scalar_vt_vech_transform.m</param.exclude.filters>
     <param.matlabpath.excludes />
     <param.javaclasspath.excludes />
     <param.exported.on.package>false</param.exported.on.package>
-    <param.required.addons />
-    <param.matlab.project.id>3c79b361-88fb-474f-9693-86a5445d458d</param.matlab.project.id>
-    <param.matlab.project.name>RMVToolbox</param.matlab.project.name>
+    <param.required.addons>
+      <requiredaddons>
+        <requiredAddOn downloadURL="" earliest="earliest" fromRepository="false" id="bf4acf8e-6de0-4f13-a23b-a2e8a2574192" include="false" latest="latest">RMVToolbox</requiredAddOn>
+      </requiredaddons>
+    </param.required.addons>
+    <param.matlab.project.id />
+    <param.matlab.project.name />
     <param.release.start />
     <param.release.end />
     <param.release.current.only>false</param.release.current.only>
@@ -74,18 +46,14 @@ M/scalar_vt_vech/scalar_vt_vech_transform.m</param.exclude.filters>
     <param.additional.sw.mac.url />
     <param.additional.sw.linux.url />
     <unset>
-      <param.authnamewatermark />
-      <param.email />
       <param.company />
-      <param.summary />
-      <param.description />
       <param.screenshot />
-      <param.version />
       <param.output />
       <param.products.name />
       <param.products.id />
       <param.products.version />
       <param.platforms />
+      <param.exclude.filters />
       <param.exclude.pcodedmfiles />
       <param.examples />
       <param.demosxml />
@@ -96,7 +64,8 @@ M/scalar_vt_vech/scalar_vt_vech_transform.m</param.exclude.filters>
       <param.matlabpath.excludes />
       <param.javaclasspath.excludes />
       <param.exported.on.package />
-      <param.required.addons />
+      <param.matlab.project.id />
+      <param.matlab.project.name />
       <param.release.start />
       <param.release.end />
       <param.release.current.only />
@@ -116,13 +85,12 @@ M/scalar_vt_vech/scalar_vt_vech_transform.m</param.exclude.filters>
     </fileset.rootdir>
     <fileset.rootfiles>
       <file>${PROJECT_ROOT}\M</file>
-      <file>${PROJECT_ROOT}\resources</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="RMVToolbox.mltbx" optional="false">C:\Data\CERGE-EI\RegularizedMultivariateVolatility\RMVToolbox\RMVToolbox.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="RMV.mltbx" optional="false">C:\Data\CERGE-EI\RegularizedMultivariateVolatility\RegularizedMultivariateVolatility\RMV\RMV.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>

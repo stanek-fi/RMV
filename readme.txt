@@ -1,0 +1,3 @@
+RMV - package for regularized multivariate volatility modeling
+
+This Matlab package builds upon the MFE toolbox (Sheppard, 2013) and provides functions for (feasible) regularized multivariate volatility modeling. It support both CAW (see function caw_regularized()) and BEKK (see function bekk_regularized()) models. Each of these functions find the optimal degree of regularization for both diagonal and off diagonal parameters via a pseudo out-of-sample evaluation and then estimate the optimally regularized model on the whole supplied dataset. As of now, it only supports order p=q=1. For more information, see the accompanying article “Unrestricted, Restricted, and Regularized Models for Forecasting Multivariate Volatility” by Stanislav Anatolyev and Filip Staněk.
